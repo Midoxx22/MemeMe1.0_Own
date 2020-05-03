@@ -20,7 +20,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var shareButtonOutlet: UIBarButtonItem!
     
     //MARK: Variables and Constants
-    var shareEnabled = false
     let TextFieldDelegate = MemeTextDelegae()
     
     //MARK: IBActions
@@ -31,7 +30,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
         present(imagePicker, animated: true, completion: nil)
-        shareEnabled = true
     }
     
     //Image Picker from Camera
@@ -40,7 +38,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imagePicker.delegate = self
         imagePicker.sourceType = .camera
         present(imagePicker, animated: true, completion: nil)
-        shareEnabled = true
     }
     
     //Save Button
@@ -66,6 +63,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imageView.image = nil
         topTextOutlet.text = "TOP TEXT"
         botTextOutlet.text = "BOT TEXT"
+        shareButtonOutlet.isEnabled = false
     }
     
     //MARK: Functions
@@ -74,10 +72,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         cameraButtonOutlet.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
-        shareButtonOutlet.isEnabled = shareEnabled
+        shareButtonOutlet.isEnabled = false
         //Subscribing to Keyboard Notifications
         subscribeToKeyboardNotifications()
-        
     }
     
     //Unsubscribe from Keyboard Notification
@@ -116,6 +113,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             imageView.image = image
         }
         
+        //Enable Share Button
+        shareButtonOutlet.isEnabled = true
         //Dismiss
         dismiss(animated: true, completion: nil)
     }
