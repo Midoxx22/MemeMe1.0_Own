@@ -110,6 +110,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         //Dictionary Key to Image for Displaying
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            //Set Image in Image View
             imageView.image = image
         }
         
