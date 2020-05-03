@@ -54,35 +54,45 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0zD-fC-aCv">
-                                <rect key="frame" x="20" y="44" width="40" height="30"/>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qod-JY-caB">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="3B0-t0-zSM"/>
+                                    <constraint firstAttribute="height" constant="44" id="03E-sa-lZ2"/>
                                 </constraints>
-                                <state key="normal" title="Share"/>
-                                <connections>
-                                    <action selector="shareButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NHP-9N-OUi"/>
-                                </connections>
-                            </button>
+                                <items>
+                                    <navigationItem title="Meme Me" id="IOc-wH-8Zk">
+                                        <barButtonItem key="leftBarButtonItem" image="square.and.arrow.up" catalog="system" id="pC8-Jq-R7v">
+                                            <connections>
+                                                <action selector="shareButton:" destination="BYZ-38-t0r" id="cIN-rE-Reu"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="bqR-nE-aTu">
+                                            <connections>
+                                                <action selector="cancelButton:" destination="BYZ-38-t0r" id="PkC-1K-3HC"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0zD-fC-aCv" secondAttribute="trailing" symbolic="YES" id="2gq-vS-xdl"/>
                             <constraint firstItem="iVr-5d-YNN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="3ie-am-bhr"/>
                             <constraint firstItem="toD-ZR-DYu" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="42T-6h-e5l"/>
                             <constraint firstItem="rKn-ca-7ud" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="6ka-fH-Cbs"/>
                             <constraint firstItem="CgD-dZ-iuZ" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="BDN-sk-3uQ"/>
                             <constraint firstItem="toD-ZR-DYu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="CBF-rw-ygH"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="toD-ZR-DYu" secondAttribute="trailing" constant="20" id="FHC-8J-lVS"/>
+                            <constraint firstItem="Qod-JY-caB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="G2e-Y8-bJ8"/>
+                            <constraint firstItem="Qod-JY-caB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="IxA-y5-SGO"/>
                             <constraint firstItem="iVr-5d-YNN" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="NZF-G3-ly4"/>
-                            <constraint firstItem="0zD-fC-aCv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="OA0-H4-t0v"/>
+                            <constraint firstItem="Qod-JY-caB" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Phl-CT-fAP"/>
                             <constraint firstItem="iVr-5d-YNN" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="U4V-gc-bRf"/>
                             <constraint firstItem="rKn-ca-7ud" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="156" id="WdI-WW-KRs"/>
                             <constraint firstItem="rKn-ca-7ud" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="XA4-he-1yD"/>
                             <constraint firstItem="CgD-dZ-iuZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="XrS-0i-Tzc"/>
                             <constraint firstItem="toD-ZR-DYu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="156" id="hpM-Rw-aGK"/>
                             <constraint firstAttribute="bottomMargin" secondItem="CgD-dZ-iuZ" secondAttribute="bottom" constant="166" id="m82-N2-ubx"/>
-                            <constraint firstItem="0zD-fC-aCv" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="qhg-Xb-mPp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -90,6 +100,9 @@
                         <outlet property="botTextOutlet" destination="CgD-dZ-iuZ" id="ahV-Lq-gdG"/>
                         <outlet property="cameraButtonOutlet" destination="lgo-wk-XnK" id="f9V-aH-vPb"/>
                         <outlet property="imageView" destination="toD-ZR-DYu" id="AfJ-hW-bBM"/>
+                        <outlet property="navBar" destination="Qod-JY-caB" id="DLP-Xf-oh0"/>
+                        <outlet property="shareButtonOutlet" destination="pC8-Jq-R7v" id="dw4-XH-7kf"/>
+                        <outlet property="toolBar" destination="iVr-5d-YNN" id="8BY-Cc-eSv"/>
                         <outlet property="topTextOutlet" destination="rKn-ca-7ud" id="UMt-rb-IQg"/>
                     </connections>
                 </viewController>
@@ -98,4 +111,7 @@
             <point key="canvasLocation" x="131.8840579710145" y="138.61607142857142"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
+    </resources>
 </document>

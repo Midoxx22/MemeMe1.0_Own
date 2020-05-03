@@ -13,6 +13,7 @@
 		CD65EA01245EEBCC0013683C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD65E9FF245EEBCC0013683C /* Main.storyboard */; };
 		CD65EA03245EEBCE0013683C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD65EA02245EEBCE0013683C /* Assets.xcassets */; };
 		CD65EA06245EEBCE0013683C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD65EA04245EEBCE0013683C /* LaunchScreen.storyboard */; };
+		CD65EA0F245F25460013683C /* MemeTextDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD65EA0E245F25460013683C /* MemeTextDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		CD65EA02245EEBCE0013683C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CD65EA05245EEBCE0013683C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CD65EA07245EEBCE0013683C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CD65EA0E245F25460013683C /* MemeTextDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeTextDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 		CD65E9F8245EEBCC0013683C /* MemeMe1.0_Own */ = {
 			isa = PBXGroup;
 			children = (
+				CD65EA0D245F25340013683C /* Delegates */,
 				CD65E9F9245EEBCC0013683C /* AppDelegate.swift */,
 				CD65E9FB245EEBCC0013683C /* SceneDelegate.swift */,
 				CD65E9FD245EEBCC0013683C /* ViewController.swift */,
@@ -65,6 +68,14 @@
 				CD65EA07245EEBCE0013683C /* Info.plist */,
 			);
 			path = MemeMe1.0_Own;
+			sourceTree = "<group>";
+		};
+		CD65EA0D245F25340013683C /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				CD65EA0E245F25460013683C /* MemeTextDelegate.swift */,
+			);
+			path = Delegates;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD65E9FE245EEBCC0013683C /* ViewController.swift in Sources */,
+				CD65EA0F245F25460013683C /* MemeTextDelegate.swift in Sources */,
 				CD65E9FA245EEBCC0013683C /* AppDelegate.swift in Sources */,
 				CD65E9FC245EEBCC0013683C /* SceneDelegate.swift in Sources */,
 			);

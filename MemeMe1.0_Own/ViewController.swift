@@ -13,13 +13,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var cameraButtonOutlet: UIBarButtonItem!
     @IBOutlet weak var topTextOutlet: UITextField!
     @IBOutlet weak var botTextOutlet: UITextField!
+    @IBOutlet weak var navBar: UINavigationBar!
+    @IBOutlet weak var toolBar: UIToolbar!
+    @IBOutlet weak var shareButtonOutlet: UIBarButtonItem!
     
+    var shareEnabled = false
+    
+    let TextFieldDelegate = MemeTextDelegae()
     
     @IBAction func imagePicker(_ sender: Any) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
         present(imagePicker, animated: true, completion: nil)
+        shareEnabled = true
     }
     
     @IBAction func cameraPicker(_ sender: Any) {
@@ -27,12 +34,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imagePicker.delegate = self
         imagePicker.sourceType = .camera
         present(imagePicker, animated: true, completion: nil)
-        
+        shareEnabled = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         cameraButtonOutlet.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+            shareButtonOutlet.isEnabled = shareEnabled
+        
         
         //Subscribing to Keyboard Notifications
         subscribeToKeyboardNotifications()
@@ -48,6 +57,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         super.viewDidLoad()
         topTextOutlet.defaultTextAttributes = memeTextAttributes
         botTextOutlet.defaultTextAttributes = memeTextAttributes
+        topTextOutlet.delegate = TextFieldDelegate
+        botTextOutlet.delegate = TextFieldDelegate
         
         //Center Text
         topTextOutlet.textAlignment = .center
@@ -68,17 +79,30 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imageView.contentMode = .center
         imageView.contentMode = .scaleAspectFit
         
+        
         //Dismiss
         dismiss(animated: true, completion: nil)
     }
     
     func generatedMemedImage() -> UIImage {
+        //Hide Toolbar and NAV Bar also Share Button
+        navBar.isHidden = true
+        toolBar.isHidden = true
+        
+        
         UIGraphicsBeginImageContext(self.view.frame.size)
         view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
         let memedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         
+        //Show Bars
+        navBar.isHidden = false
+        toolBar.isHidden = false
+        
+        
         return memedImage
+        
+        
     }
     
     func save() {
@@ -116,6 +140,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             }
         }
     
+    @IBAction func cancelButton(_ sender: Any) {
+        imageView.image = nil
+        topTextOutlet.text = "TOP TEXT"
+        botTextOutlet.text = "BOT TEXT"
+    }
+    
+    
     //MARK: MemeTextAttributes
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
         NSAttributedString.Key.strokeColor: UIColor.black,
@@ -147,8 +178,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @objc func keyboardWillShow(_ notification:Notification) {
-
-        view.frame.origin.y -= getKeyboardHeight(notification)
+        if botTextOutlet.isEditing{
+            view.frame.origin.y -= getKeyboardHeight(notification)
+        }
+        
     }
     
     
@@ -159,6 +192,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func getKeyboardHeight(_ notification:Notification) -> CGFloat {
 
         let userInfo = notification.userInfo
+        
         let keyboardSize = userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue // of CGRect
         return keyboardSize.cgRectValue.height
     }
