@@ -27,7 +27,7 @@ class SentMemeTableVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         
         let data = self.memes[(indexPath as NSIndexPath).row]
         
-        
+        //Why Optionals are forced?
         cell?.textLabel?.text = data.botText
         
         return cell!
