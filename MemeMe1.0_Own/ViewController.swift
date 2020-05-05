@@ -151,6 +151,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         //Save Function to Photo Album
         UIImageWriteToSavedPhotosAlbum(meme.memedImage, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
         
+        //Add to Shared Data Model in App Delegate
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        appDelegate.memes.append(meme)
+        
     }
     
     //Alert View if Saving was Successfull or not
@@ -178,14 +183,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     ]
     
     //MARK: MemeStruct
-    
+    /*
     struct Meme {
         var topText: String
         var botText: String
         var origImage: UIImage
         var memedImage: UIImage
     }
-    
+    */
     //MARK: SubscribingToNotifications
 
     //Subscribing to NSNotifications
