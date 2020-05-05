@@ -34,7 +34,7 @@ class SentMemeTableVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     }
     
     
-    //Button for Testing if Array Contains Data
+    //Button for Testing if Array Contains Data which Works
     @IBAction func countButton(_ sender: Any) {
         let data = self.memes[0]
         print(data.botText)
