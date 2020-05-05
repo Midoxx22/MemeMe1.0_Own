@@ -9,7 +9,8 @@
 import UIKit
 
 class SentMemeTableVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+    @IBOutlet weak var tableViewOutlet: UITableView!
+    
     var memes: [Meme]! {
         let object = UIApplication.shared.delegate
         let appDelegate = object as! AppDelegate
@@ -28,7 +29,8 @@ class SentMemeTableVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         let data = self.memes[(indexPath as NSIndexPath).row]
         
         //Why Optionals are forced?
-        cell?.textLabel?.text = data.botText
+        cell?.textLabel?.text = data.topText + " " + data.botText
+        cell?.imageView?.image = data.memedImage
         
         return cell!
     }
@@ -40,6 +42,10 @@ class SentMemeTableVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         print(data.botText)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        tableViewOutlet.reloadData()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
