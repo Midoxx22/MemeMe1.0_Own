@@ -14,11 +14,6 @@ class SentMemeCollectionVC: UICollectionViewController {
     @IBOutlet var collectionViewOutlet: UICollectionView!
     @IBOutlet var flowLayout: UICollectionViewFlowLayout!
     
-    //MARK: TESTING
-    private var numberOfItemsInRow = 2
-    private var minimumSpacing = 5
-    private var edgeInsetPadding = 10
-    
     
     
     var memes: [Meme]! {
