@@ -37,10 +37,11 @@ class SentMemeTableVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     
     
     //Button for Testing if Array Contains Data which Works
-    @IBAction func countButton(_ sender: Any) {
-        let data = self.memes[0]
-        print(data.botText)
+    @IBAction func testAPI(_ sender: Any) {
+        MemeAPI.requestTrendingMemesAPI()
     }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)

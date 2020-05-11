@@ -107,7 +107,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" title="Testing"/>
                                     <connections>
-                                        <action selector="countButton:" destination="Cgb-cv-82k" eventType="touchUpInside" id="Kgi-x9-2rx"/>
+                                        <action selector="testAPI:" destination="Cgb-cv-82k" eventType="touchUpInside" id="Q2F-Df-rmz"/>
                                     </connections>
                                 </button>
                             </barButtonItem>

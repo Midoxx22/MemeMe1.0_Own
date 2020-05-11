@@ -19,6 +19,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var shareButtonOutlet: UIBarButtonItem!
     
+    //MARK: API TESTING
+    @IBAction func testAPIButton(_ sender: Any) {
+        MemeAPI.requestTrendingMemesAPI()
+    }
+    
     //MARK: Variables and Constants
     let TextFieldDelegate = MemeTextDelegae()
     
@@ -223,4 +228,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let keyboardSize = userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue // of CGRect
         return keyboardSize.cgRectValue.height
     }
+    
+    
+    //MARK: API TESTING FUNCTIONS
+    
+    
 }
