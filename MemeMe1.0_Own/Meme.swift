@@ -15,3 +15,7 @@ struct Meme {
     var origImage: UIImage
     var memedImage: UIImage
 }
+
+struct MemeData {
+    var memeName: String
+}

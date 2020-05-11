@@ -38,7 +38,23 @@ class SentMemeTableVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     
     //Button for Testing if Array Contains Data which Works
     @IBAction func testAPI(_ sender: Any) {
-        MemeAPI.requestTrendingMemesAPI()
+        //MemeAPI.requestTrendingMemesAPI()
+        let url = MemeAPI.Endpoint.getDataFromAPI.url
+        //MemeAPI.requestTrendingMemesAPI()
+        
+        /*
+        MemeAPI.requestAPIImageFile(url: url) { (image, error) in
+            //RETURNS NOW UI IMAGE AND AN ERROR!!!
+        }
+         */
+        
+        MemeAPI.requestAPIImageData { (data, error) in
+            print(data?.data.memes.count)
+            print("Looser lol bob")
+            
+            
+        }
+        
     }
     
     

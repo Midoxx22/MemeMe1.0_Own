@@ -8,21 +8,11 @@
 
 import Foundation
 
-//MEME DATA
-var memeCount: Int = 0
-var memeNames: [String] = []
+
 
 struct MemeFlipImg: Codable {
     let success: Bool
     let data: Memes
-    static var instances = 0
-    
-    init(success: Bool, data: Memes) {
-        self.success = success
-        self.data = data
-        
-        MemeFlipImg.instances += 1
-    }
 }
 
 struct Memes: Codable {

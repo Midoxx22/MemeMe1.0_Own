@@ -20,12 +20,34 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var shareButtonOutlet: UIBarButtonItem!
     
     //MARK: API TESTING
-    @IBAction func testAPIButton(_ sender: Any) {
-        MemeAPI.requestTrendingMemesAPI()
+    @IBAction func NewTheAPITEST(_ sender: Any) {
+        
+        /*
+        MemeAPI.requestAPIImageData { (imgData, error) in
+            var i = 0
+            while(i < (imgData?.data.memes.count)!) {
+                self.memeNames.append((imgData?.data.memes[i].name)!)
+                i+=1
+            }
+        }
+        */
+        self.performSegue(withIdentifier: "apiSegue", sender: self)
+        print("Hello")
+    }
+    
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "apiSegue" {
+            let controller = segue.destination as! MemeAPICollectionVC
+            controller.memeNames = self.memeNames
+        }
+        
     }
     
     //MARK: Variables and Constants
     let TextFieldDelegate = MemeTextDelegae()
+    var memeNames: [String] = []
     
     //MARK: IBActions
     
@@ -35,6 +57,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
         present(imagePicker, animated: true, completion: nil)
+        print("IMGPICKER")
     }
     
     //Image Picker from Camera
@@ -80,6 +103,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         shareButtonOutlet.isEnabled = false
         //Subscribing to Keyboard Notifications
         subscribeToKeyboardNotifications()
+        
+        //MARK: TEST API
+        MemeAPI.requestAPIImageData { (imgData, error) in
+            var i = 0
+            while(i < (imgData?.data.memes.count)!) {
+                self.memeNames.append((imgData?.data.memes[i].name)!)
+                i+=1
+            }
+        }
     }
     
     //Unsubscribe from Keyboard Notification
@@ -232,5 +264,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     //MARK: API TESTING FUNCTIONS
     
+    @IBAction func memeCollectionAPI(_ sender: Any) {
+    }
     
 }
