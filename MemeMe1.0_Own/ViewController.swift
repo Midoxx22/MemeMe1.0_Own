@@ -32,7 +32,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
         */
         self.performSegue(withIdentifier: "apiSegue", sender: self)
-        print("Hello")
+        
+        /*
+        print("HelloLole")
+        print(memeURL.count)
+        print(memePics.count)
+        
+        for memelol in memeRawData {
+            print(memelol)
+        }
+        for imgName in memeRawData {
+            print(imgName.url)
+        }
+        */
     }
     
     
@@ -41,6 +53,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         if segue.identifier == "apiSegue" {
             let controller = segue.destination as! MemeAPICollectionVC
             controller.memeNames = self.memeNames
+            controller.memeImages = self.memePics
+            
+            controller.memeRawData = self.memeRawData
         }
         
     }
@@ -48,6 +63,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     //MARK: Variables and Constants
     let TextFieldDelegate = MemeTextDelegae()
     var memeNames: [String] = []
+    var memeURL: [URL] = []
+    var memePics: [UIImage] = []
+    
+    var memeRawData: [MemeRawData] = []
     
     //MARK: IBActions
     
@@ -105,13 +124,68 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         subscribeToKeyboardNotifications()
         
         //MARK: TEST API
-        MemeAPI.requestAPIImageData { (imgData, error) in
-            var i = 0
-            while(i < (imgData?.data.memes.count)!) {
-                self.memeNames.append((imgData?.data.memes[i].name)!)
-                i+=1
-            }
+
+        
+        var meme = MemeRawData(name: "", url: "", img: UIImage())
+        var memeName = ""
+        var memeURL = ""
+        var memeIMG = UIImage()
+        
+        let g = DispatchGroup()
+            MemeAPI.requestAPIImageData { (imgData, error) in
+                imgData?.data.memes.forEach{
+                    memeData in
+                    g.enter()
+                    memeName = memeData.name!
+                    memeURL = memeData.url!
+                    MemeAPI.requestAPIImageFile(url: URL(string: memeData.url!)!) { (image, error) in
+                        guard let image = image else {
+                            print("PIC IS NIL")
+                            return
+                        }
+                        memeIMG = image
+                        print("-----NEW PIC ADDED-------")
+                    }
+                    
+                    meme = MemeRawData(name: memeName, url: memeURL, img: memeIMG)
+                    
+                    self.memeRawData.append(meme)
+                    
+                    g.leave()
+                    }
+                g.notify(queue:.main) {
+                print("All done")
+                }
         }
+        
+        //MARK: WORKING VERSION!!!
+        /*
+        let g = DispatchGroup()
+        MemeAPI.requestAPIImageData { (imgData, error) in
+            imgData?.data.memes.forEach{
+                memeData in
+                g.enter()
+                self.memeNames.append(memeData.name!)
+                self.memeURL.append(URL(string: memeData.url!)!)
+                g.leave()
+                }
+            self.memeURL.forEach {
+                g.enter()
+                    MemeAPI.requestAPIImageFile(url:$0) { (image, error) in
+                        guard let image = image else {
+                            print("PIC IS NIL")
+                            return
+                        }
+                        self.memePics.append(image)
+                        
+                    }
+                g.leave()
+            }
+            g.notify(queue:.main) {
+            print("All done")
+            }
+    }
+        */
     }
     
     //Unsubscribe from Keyboard Notification

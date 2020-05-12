@@ -7,21 +7,28 @@
 //
 
 import UIKit
+import Alamofire
 
 class MemeAPICollectionVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     @IBOutlet weak var tableViewOutlet: UITableView!
     
-    
+    var image: UIImage = UIImage()
     var memeNames: [String] = []
+    var memeImages: [UIImage] = []
+    
+    var memeRawData: [MemeRawData] = []
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return memeNames.count
+        return memeRawData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "memeAPICell")
-        cell?.textLabel?.text = memeNames[indexPath.row]
+        
+        cell?.textLabel?.text = memeRawData[indexPath.row].name
+        cell?.imageView?.image = memeRawData[indexPath.row].img
+
         return cell!
     }
     
@@ -34,7 +41,33 @@ class MemeAPICollectionVC: UIViewController, UITableViewDelegate, UITableViewDat
         // Do any additional setup after loading the view.
     }
     
+    func setImageFromUrl(ImageURL :String) {
+       URLSession.shared.dataTask( with: NSURL(string:ImageURL)! as URL, completionHandler: {
+          (data, response, error) -> Void in
+          DispatchQueue.main.async {
+             if let data = data {
+                self.image = UIImage(data: data)!
+             }
+          }
+       }).resume()
+        
+        
+    }
 
   
 
+}
+
+extension UIImageView {
+    func load(url: URL) {
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.image = image
+                    }
+                }
+            }
+        }
+    }
 }

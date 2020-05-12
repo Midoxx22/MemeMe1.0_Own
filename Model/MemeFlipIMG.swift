@@ -7,8 +7,13 @@
 //
 
 import Foundation
+import UIKit
 
-
+struct MemeRawData {
+    let name: String?
+    let url: String?
+    let img: UIImage?
+}
 
 struct MemeFlipImg: Codable {
     let success: Bool
