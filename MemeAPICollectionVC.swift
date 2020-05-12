@@ -27,12 +27,24 @@ class MemeAPICollectionVC: UIViewController, UITableViewDelegate, UITableViewDat
         let cell = tableView.dequeueReusableCell(withIdentifier: "memeAPICell")
         
         cell?.textLabel?.text = memeRawData[indexPath.row].name
-        cell?.imageView?.image = memeRawData[indexPath.row].img
+        //cell?.imageView?.image = memeRawData[indexPath.row].img
+        self.setImage(imageView: cell!.imageView!, url: URL(string: memeRawData[indexPath.row].url!)!)
 
         return cell!
     }
     
-    
+    func setImage(imageView:UIImageView,url:URL){
+        let task = URLSession.shared.dataTask(with: url){ (data, response, error) in
+            if error != nil{
+                return
+            }
+            DispatchQueue.main.async {
+                let img = UIImage(data: data!)
+                imageView.image = img
+            }
+        }
+        task.resume()
+    }
     
 
     override func viewDidLoad() {
